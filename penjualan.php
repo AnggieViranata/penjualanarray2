@@ -64,4 +64,38 @@ for ($i = 0; $i < count($barang); $i++) {
 echo "<strong>Grand Total : Rp $grandtotal</strong><br>";
 echo "Data pembelian acak berhasil dibuat!<br>";
 echo "<strong>====================================================</strong><br><br>";
+
+// ===============================
+// Commit 4 – Output Akhir
+// ===============================
+echo "<h3>NOTA PEMBELIAN</h3>";
+echo "<pre>"; // pakai <pre> agar format spasi dan padding terlihat rapi
+
+echo "====================================================\n";
+echo "Kode   | Nama Barang      | Harga     | Jumlah | Total      \n";
+echo "----------------------------------------------------\n";
+
+// tampilkan ulang data pembelian acak
+$grandtotal = 0;
+for ($i = 0; $i < count($barang); $i++) {
+    $jumlah = rand(1, 5); // jumlah acak
+    $total = $barang[$i][2] * $jumlah;
+    $grandtotal += $total;
+
+    // format kolom agar rapi
+    $kode   = str_pad($barang[$i][0], 6);
+    $nama   = str_pad($barang[$i][1], 16);
+    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
+    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+
+    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}\n";
+}
+
+echo "----------------------------------------------------\n";
+echo "Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "\n";
+echo "====================================================\n";
+echo "Terima kasih telah berbelanja di POLGAN MART!\n";
+echo "</pre>";
+
 ?>
