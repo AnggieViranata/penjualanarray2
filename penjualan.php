@@ -36,6 +36,32 @@ foreach ($barang as $b) {
 }
 
 echo "Data pembelian acak berhasil dibuat!<br>";
+echo "<strong>====================================================</strong><br><br>";
 
 
+// ===============================
+// Commit 3 – Perhitungan Total Pembelian
+// ===============================
+
+// buat variabel grand total
+$grandtotal = 0;
+
+// perulangan for untuk memilih barang dan jumlah beli acak
+for ($i = 0; $i < count($barang); $i++) {
+    $jumlah = rand(1, 5); // jumlah beli acak antara 1–5
+    $total = $barang[$i][2] * $jumlah; // total harga per item
+    $grandtotal += $total; // tambahkan ke total keseluruhan
+
+    // tampilkan detail tiap barang
+    echo "Kode Barang : " . $barang[$i][0] . "<br>";
+    echo "Nama Barang : " . $barang[$i][1] . "<br>";
+    echo "Harga Barang : " . $barang[$i][2] . "<br>";
+    echo "Jumlah Beli : " . $jumlah . "<br>";
+    echo "Total Harga : " . $total . "<br><br>";
+}
+
+// tampilkan total keseluruhan
+echo "<strong>Grand Total : Rp $grandtotal</strong><br>";
+echo "Data pembelian acak berhasil dibuat!<br>";
+echo "<strong>====================================================</strong><br><br>";
 ?>
