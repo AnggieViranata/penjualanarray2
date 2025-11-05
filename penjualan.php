@@ -98,4 +98,39 @@ echo "====================================================\n";
 echo "Terima kasih telah berbelanja di POLGAN MART!\n";
 echo "</pre>";
 
+
+// ===============================
+// Commit 5 – Menambahkan Kode Barang
+// ===============================
+echo "<h3>NOTA PEMBELIAN</h3>";
+echo "<pre>";
+echo "====================================================\n";
+echo "<strong>Kode Barang | Nama Barang      | Harga     | Jumlah | Total</strong>\n";
+echo "----------------------------------------------------\n";
+
+$grandtotal = 0;
+
+// tampilkan ulang data pembelian acak dengan kolom kode barang yang lebih rapi
+for ($i = 0; $i < count($barang); $i++) {
+    $jumlah = rand(1, 5);
+    $total = $barang[$i][2] * $jumlah;
+    $grandtotal += $total;
+
+    // format kolom agar lebih sejajar
+    $kode   = str_pad($barang[$i][0], 11);
+    $nama   = str_pad($barang[$i][1], 16);
+    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
+    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+
+    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}\n";
+}
+
+echo "----------------------------------------------------\n";
+echo "<strong>Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "</strong>\n";
+echo "====================================================\n";
+echo "</pre>";
+
+
+
 ?>
