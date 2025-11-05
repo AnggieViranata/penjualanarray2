@@ -132,5 +132,56 @@ echo "====================================================\n";
 echo "</pre>";
 
 
+// ===============================
+// Commit 6 – Menambahkan Diskon
+// ===============================
+
+echo "<h3>NOTA PEMBELIAN</h3>";
+echo "<div style='font-family: monospace;'>";
+echo "====================================================<br>";
+echo "<strong>Kode Barang | Nama Barang      | Harga     | Jumlah | Total</strong><br>";
+echo "----------------------------------------------------<br>";
+
+$grandtotal = 0;
+
+// tampilkan ulang data pembelian acak dengan kolom kode barang yang rapi
+for ($i = 0; $i < count($barang); $i++) {
+    $jumlah = rand(1, 5);
+    $total = $barang[$i][2] * $jumlah;
+    $grandtotal += $total;
+
+    // format kolom agar lebih sejajar
+    $kode   = str_pad($barang[$i][0], 11);
+    $nama   = str_pad($barang[$i][1], 16);
+    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
+    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
+
+    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}<br>";
+}
+
+// ----------------------------------------------------
+// Hitung Diskon
+// ----------------------------------------------------
+if ($grandtotal <= 50000) {
+    $persen = 5;
+} elseif ($grandtotal <= 100000) {
+    $persen = 10;
+} else {
+    $persen = 20;
+}
+
+$diskon = $grandtotal * ($persen / 100);
+$total_setelah_diskon = $grandtotal - $diskon;
+
+// ----------------------------------------------------
+// Output bagian bawah nota
+// ----------------------------------------------------
+echo "----------------------------------------------------<br>";
+echo "Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "<br>";
+
+echo "Diskon : Rp" . number_format($diskon, 0, ',', '.') . " ({$persen}%)<br>";
+echo "====================================================<br>";
+echo "</div>";
 
 ?>
