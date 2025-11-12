@@ -1,25 +1,7 @@
 <?php
-
-/*
 // ===============================
-// Commit 1 – Setup Awal
+// Data Produk
 // ===============================
-
-// Header toko
-echo "<h2> --POLGAN MART-- </h2>";
-
-// Data produk (5 produk)
-$kode_barang  = ["B001", "B002", "B003", "B004", "B005"];
-$nama_barang  = ["Teh Pucuk", "Sukro", "Sprite", "Chitato", "Indomie"];
-$harga_barang = [5000, 1000, 4000, 8000, 3500];
-
-*/
-
-// ===============================
-// Commit 2 – Logika Pembelian
-// ===============================
-
-// buat array gabungan agar bisa diacak sekaligus
 $barang = [
     ["B001", "Teh Pucuk", 5000],
     ["B002", "Sukro", 1000],
@@ -27,149 +9,28 @@ $barang = [
     ["B004", "Chitato", 8000],
     ["B005", "Indomie", 3500]
 ];
-
-// fungsi untuk acak urutan produk
 shuffle($barang);
 
-/*
-// tampilkan hasil daftar barang acak
-foreach ($barang as $b) {
-    echo "Kode Barang : $b[0]<br>";
-    echo "Nama Barang : $b[1]<br>";
-    echo "Harga Barang : $b[2]<br><br>";
-}
-
-echo "Data pembelian acak berhasil dibuat!<br>";
-echo "<strong>====================================================</strong><br><br>";
-
-
-
 // ===============================
-// Commit 3 – Perhitungan Total Pembelian
+// Hitung Total dan Diskon
 // ===============================
-
-// buat variabel grand total
 $grandtotal = 0;
+$pembelian = [];
 
-// perulangan for untuk memilih barang dan jumlah beli acak
-for ($i = 0; $i < count($barang); $i++) {
-    $jumlah = rand(1, 5); // jumlah beli acak antara 1–5
-    $total = $barang[$i][2] * $jumlah; // total harga per item
-    $grandtotal += $total; // tambahkan ke total keseluruhan
-
-    // tampilkan detail tiap barang
-    echo "Kode Barang : " . $barang[$i][0] . "<br>";
-    echo "Nama Barang : " . $barang[$i][1] . "<br>";
-    echo "Harga Barang : " . $barang[$i][2] . "<br>";
-    echo "Jumlah Beli : " . $jumlah . "<br>";
-    echo "Total Harga : " . $total . "<br><br>";
-}
-
-// tampilkan total keseluruhan
-echo "<strong>Grand Total : Rp $grandtotal</strong><br>";
-echo "Data pembelian acak berhasil dibuat!<br>";
-echo "<strong>====================================================</strong><br><br>";
-
-// ===============================
-// Commit 4 – Output Akhir
-// ===============================
-echo "<h3>NOTA PEMBELIAN</h3>";
-echo "<pre>"; // pakai <pre> agar format spasi dan padding terlihat rapi
-
-echo "====================================================\n";
-echo "Kode   | Nama Barang      | Harga     | Jumlah | Total      \n";
-echo "----------------------------------------------------\n";
-
-// tampilkan ulang data pembelian acak
-$grandtotal = 0;
-for ($i = 0; $i < count($barang); $i++) {
-    $jumlah = rand(1, 5); // jumlah acak
-    $total = $barang[$i][2] * $jumlah;
-    $grandtotal += $total;
-
-    // format kolom agar rapi
-    $kode   = str_pad($barang[$i][0], 6);
-    $nama   = str_pad($barang[$i][1], 16);
-    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
-    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-
-    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}\n";
-}
-
-echo "----------------------------------------------------\n";
-echo "Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "\n";
-echo "====================================================\n";
-echo "Terima kasih telah berbelanja di POLGAN MART!\n";
-echo "</pre>";
-
-
-// ===============================
-// Commit 5 – Menambahkan Kode Barang
-// ===============================
-echo "<h3>NOTA PEMBELIAN</h3>";
-echo "<pre>";
-echo "====================================================\n";
-echo "<strong>Kode Barang | Nama Barang      | Harga     | Jumlah | Total</strong>\n";
-echo "----------------------------------------------------\n";
-
-$grandtotal = 0;
-
-// tampilkan ulang data pembelian acak dengan kolom kode barang yang lebih rapi
 for ($i = 0; $i < count($barang); $i++) {
     $jumlah = rand(1, 5);
     $total = $barang[$i][2] * $jumlah;
+    $pembelian[] = [
+        "kode" => $barang[$i][0],
+        "nama" => $barang[$i][1],
+        "harga" => $barang[$i][2],
+        "jumlah" => $jumlah,
+        "total" => $total
+    ];
     $grandtotal += $total;
-
-    // format kolom agar lebih sejajar
-    $kode   = str_pad($barang[$i][0], 11);
-    $nama   = str_pad($barang[$i][1], 16);
-    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
-    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-
-    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}\n";
 }
 
-echo "----------------------------------------------------\n";
-echo "<strong>Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "</strong>\n";
-echo "====================================================\n";
-echo "</pre>";
-
-*/
-
-// ===============================
-// Commit 6 – Menambahkan Diskon
-// ===============================
-
-echo "<h3>NOTA PEMBELIAN</h3>";
-echo "<div style='font-family: monospace;'>";
-echo "JL. Veteran No. 194, Deli Serdang<br>";
-echo "====================================================<br>";
-echo "<strong>Kode Barang | Nama Barang      | Harga     | Jumlah | Total</strong><br>";
-echo "----------------------------------------------------<br>";
-
-$grandtotal = 0;
-
-// tampilkan ulang data pembelian acak dengan kolom kode barang yang rapi
-for ($i = 0; $i < count($barang); $i++) {
-    $jumlah = rand(1, 5);
-    $total = $barang[$i][2] * $jumlah;
-    $grandtotal += $total;
-
-    // format kolom agar lebih sejajar
-    $kode   = str_pad($barang[$i][0], 11);
-    $nama   = str_pad($barang[$i][1], 16);
-    $harga  = str_pad("Rp" . number_format($barang[$i][2], 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-    $jml    = str_pad($jumlah, 6, ' ', STR_PAD_LEFT);
-    $tot    = str_pad("Rp" . number_format($total, 0, ',', '.'), 10, ' ', STR_PAD_LEFT);
-
-    echo "{$kode}| {$nama}| {$harga} | {$jml} | {$tot}<br>";
-}
-
-// ----------------------------------------------------
-// Hitung Diskon
-// ----------------------------------------------------
+// diskon
 if ($grandtotal <= 50000) {
     $persen = 5;
 } elseif ($grandtotal <= 100000) {
@@ -180,16 +41,97 @@ if ($grandtotal <= 50000) {
 
 $diskon = $grandtotal * ($persen / 100);
 $total_setelah_diskon = $grandtotal - $diskon;
-
-// ----------------------------------------------------
-// Output bagian bawah nota
-// ----------------------------------------------------
-echo "----------------------------------------------------<br>";
-echo "Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "<br>";
-
-echo "Diskon : Rp" . number_format($diskon, 0, ',', '.') . " ({$persen}%)<br>";
-echo "====================================================<br>";
-echo "</div>";
-
 ?>
-<?php
+
+<!-- ===============================
+Tampilan Nota dalam Kotak Putih
+================================= -->
+<div class="nota-box">
+    <h3>NOTA PEMBELIAN</h3>
+    <p>JL. Veteran No. 194, Deli Serdang</p>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($pembelian as $item): ?>
+            <tr>
+                <td><?= $item["kode"]; ?></td>
+                <td><?= $item["nama"]; ?></td>
+                <td>Rp<?= number_format($item["harga"], 0, ',', '.'); ?></td>
+                <td><?= $item["jumlah"]; ?></td>
+                <td>Rp<?= number_format($item["total"], 0, ',', '.'); ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right;">Grand Total :</th>
+                <th>Rp<?= number_format($grandtotal, 0, ',', '.'); ?></th>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right;">Diskon (<?= $persen; ?>%) :</th>
+                <th>Rp<?= number_format($diskon, 0, ',', '.'); ?></th>
+            </tr>
+            <tr>
+                <th colspan="4" style="text-align:right;">Total Akhir :</th>
+                <th>Rp<?= number_format($total_setelah_diskon, 0, ',', '.'); ?></th>
+            </tr>
+        </tfoot>
+    </table>
+
+
+</div>
+
+<style>
+    .nota-box {
+        background: #fff;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .nota-box h3 {
+        text-align: center;
+        margin-bottom: 5px;
+        color: #222;
+    }
+    .nota-box p {
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+    }
+    .nota-box hr {
+        border: 1px dashed #666;
+        margin: 10px 0 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: monospace;
+        font-size: 15px;
+    }
+    th, td {
+        border: 1px solid #999;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: 		#FFA07A;
+        color: white;
+    }
+    tfoot th {
+        background-color: 	#A9A9A9;
+        text-align: right;
+    }
+</style>

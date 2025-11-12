@@ -94,7 +94,9 @@ if (!isset($_SESSION['username'])) {
     </div>
 
     <hr>
-
+<!-- Tambahkan include penjualan -->
+    <?php include 'penjualan.php'; ?>
+</div>
 <footer>
     © 2025 Sistem Penjualan - POLGAN
 </footer>
