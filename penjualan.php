@@ -1,4 +1,6 @@
 <?php
+
+/*
 // ===============================
 // Commit 1 – Setup Awal
 // ===============================
@@ -11,6 +13,7 @@ $kode_barang  = ["B001", "B002", "B003", "B004", "B005"];
 $nama_barang  = ["Teh Pucuk", "Sukro", "Sprite", "Chitato", "Indomie"];
 $harga_barang = [5000, 1000, 4000, 8000, 3500];
 
+*/
 
 // ===============================
 // Commit 2 – Logika Pembelian
@@ -28,6 +31,7 @@ $barang = [
 // fungsi untuk acak urutan produk
 shuffle($barang);
 
+/*
 // tampilkan hasil daftar barang acak
 foreach ($barang as $b) {
     echo "Kode Barang : $b[0]<br>";
@@ -37,6 +41,7 @@ foreach ($barang as $b) {
 
 echo "Data pembelian acak berhasil dibuat!<br>";
 echo "<strong>====================================================</strong><br><br>";
+
 
 
 // ===============================
@@ -131,6 +136,7 @@ echo "<strong>Grand Total : Rp" . number_format($grandtotal, 0, ',', '.') . "</s
 echo "====================================================\n";
 echo "</pre>";
 
+*/
 
 // ===============================
 // Commit 6 – Menambahkan Diskon
@@ -138,6 +144,7 @@ echo "</pre>";
 
 echo "<h3>NOTA PEMBELIAN</h3>";
 echo "<div style='font-family: monospace;'>";
+echo "JL. Veteran No. 194, Deli Serdang<br>";
 echo "====================================================<br>";
 echo "<strong>Kode Barang | Nama Barang      | Harga     | Jumlah | Total</strong><br>";
 echo "----------------------------------------------------<br>";
