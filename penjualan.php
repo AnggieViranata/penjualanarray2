@@ -1,36 +1,17 @@
 <?php
 // ===============================
-// Data Produk
+// Ambil Data dari Session
 // ===============================
-$barang = [
-    ["B001", "Teh Pucuk", 5000],
-    ["B002", "Sukro", 1000],
-    ["B003", "Sprite", 4000],
-    ["B004", "Chitato", 8000],
-    ["B005", "Indomie", 3500]
-];
-shuffle($barang);
+$pembelian = isset($_SESSION['keranjang']) ? $_SESSION['keranjang'] : [];
 
-// ===============================
-// Hitung Total dan Diskon
-// ===============================
 $grandtotal = 0;
-$pembelian = [];
-
-for ($i = 0; $i < count($barang); $i++) {
-    $jumlah = rand(1, 5);
-    $total = $barang[$i][2] * $jumlah;
-    $pembelian[] = [
-        "kode" => $barang[$i][0],
-        "nama" => $barang[$i][1],
-        "harga" => $barang[$i][2],
-        "jumlah" => $jumlah,
-        "total" => $total
-    ];
-    $grandtotal += $total;
+foreach ($pembelian as $item) {
+    $grandtotal += $item["total"];
 }
 
-// diskon
+// ===============================
+// Hitung Diskon
+// ===============================
 if ($grandtotal <= 50000) {
     $persen = 5;
 } elseif ($grandtotal <= 100000) {
@@ -44,7 +25,7 @@ $total_setelah_diskon = $grandtotal - $diskon;
 ?>
 
 <!-- ===============================
-Tampilan Nota dalam Kotak Putih
+Tampilan Nota Pembelian
 ================================= -->
 <div class="nota-box">
     <h3>NOTA PEMBELIAN</h3>
@@ -61,7 +42,13 @@ Tampilan Nota dalam Kotak Putih
                 <th>Total</th>
             </tr>
         </thead>
+
         <tbody>
+        <?php if (empty($pembelian)) : ?>
+            <tr>
+                <td colspan="5" style="text-align:center;">Belum ada barang ditambahkan.</td>
+            </tr>
+        <?php else : ?>
             <?php foreach ($pembelian as $item): ?>
             <tr>
                 <td><?= $item["kode"]; ?></td>
@@ -71,7 +58,10 @@ Tampilan Nota dalam Kotak Putih
                 <td>Rp<?= number_format($item["total"], 0, ',', '.'); ?></td>
             </tr>
             <?php endforeach; ?>
+        <?php endif; ?>
         </tbody>
+
+        <?php if (!empty($pembelian)) : ?>
         <tfoot>
             <tr>
                 <th colspan="4" style="text-align:right;">Grand Total :</th>
@@ -86,9 +76,8 @@ Tampilan Nota dalam Kotak Putih
                 <th>Rp<?= number_format($total_setelah_diskon, 0, ',', '.'); ?></th>
             </tr>
         </tfoot>
+        <?php endif; ?>
     </table>
-
-
 </div>
 
 <style>
@@ -127,11 +116,11 @@ Tampilan Nota dalam Kotak Putih
         text-align: center;
     }
     th {
-        background-color: 		#FFA07A;
+        background-color: #FFA07A;
         color: white;
     }
     tfoot th {
-        background-color: 	#A9A9A9;
+        background-color: #A9A9A9;
         text-align: right;
     }
 </style>
